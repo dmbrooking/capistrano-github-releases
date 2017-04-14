@@ -20,7 +20,7 @@ namespace :github do
     set :released_at, -> { Time.now }
     set :release_tag, -> { fetch(:released_at).strftime('%Y%m%d-%H%M%S%z') }
     set :release_title, -> { fetch(:released_at).strftime('%Y%m%d-%H%M%S%z') }
-    set :release_body, -> { Octokit::Client.new.commits(fetch(:github_repo)).first.commit.message }
+    set :release_body, -> { Octokit::Client.new.commits(fetch(:github_repo, 'deploy')).first.commit.message }
 
     set :username, -> {
       username = `git config --get user.name`.strip
